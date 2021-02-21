@@ -1,11 +1,11 @@
+// Templates
+import picturesTemplate from '../templates/galleryItems.hbs';
 // JS files
 import refs from './refs';
 
-// Templates
-import galleryListItemsTemplate from '../templates/galleryListItems.hbs';
-
 function updateGallery(pictures) {
-  const markup = galleryListItemsTemplate(pictures);
+  console.log('1');
+  const markup = picturesTemplate(pictures);
   refs.galleryList.insertAdjacentHTML('beforeend', markup);
 }
 

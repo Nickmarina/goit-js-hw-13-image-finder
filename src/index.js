@@ -1,28 +1,63 @@
-// Styles
-import './sass/styles.scss';
-
 // Js-files
 import apiService from './js/apiService';
-import refs from './js/refs';
 import updateGallery from './js/updateGallery';
+import refs from './js/refs';
+// Styles
+import './sass/styles.scss';
+// // Debounce
+// import debounce from 'lodash.debounce';
 
-refs.searchForm.addEventListener('submit', searchItemsFn);
+refs.searchForm.addEventListener('submit', submitHandlerFn);
 
-function searchItemsFn(event) {
+function submitHandlerFn(event) {
   event.preventDefault();
-
   const form = event.currentTarget;
-  apiService.query = form.elements.query.value;
-  clearGalleryList();
-  // refs.galleryList.innerHTML = '';
+  const inputValue = form.elements.query.value;
+  console.log(inputValue);
+  if (inputValue === '') {
+    return alert('Введи что-то нормальное');
+  }
+  if (!inputValue) {
+    return;
+  }
+
+  // apiService.query = form.elements.query.value;
+  // console.log(apiService.query);
+  refs.galleryList.innerHTML = '';
+
   apiService.resetPage();
-  fetchGallery();
+  apiService.fetchPictures(inputValue).then(updateGallery());
+
   form.reset();
 }
 
-function clearGalleryList() {
-  refs.galleryList.innerHTML = '';
-}
-function fetchGallery() {
-  apiService.fetchPictures().then(pictures => updateGallery(pictures));
-}
+// // refs.searchForm.addEventListener('submit', searchItemsFn);
+// refs.searchForm.addEventListener('input', debounce(searchItemsFn, 500));
+
+// function searchItemsFn(event) {
+//   event.preventDefault();
+
+//   // const form = event.currentTarget;
+//   // apiService.query = form.elements.query.value;
+//   const inputValue = event.target.value;
+
+//   if (inputValue === '') {
+//     // if (apiService.query === '') {
+//     return alert('Введи что-то нормальное');
+//   }
+//   console.log(inputValue);
+
+//   // apiService.resetPage();
+//   // clearGalleryList();
+//   apiService.fetchPictures(inputValue).then(updateGallery);
+//   // form.reset();
+// }
+
+// // function clearGalleryList() {
+// //   refs.galleryList.innerHTML = '';
+// // }
+// // function fetchGallery(inputValue) {
+// //   apiService
+// //     .fetchPictures(inputValue)
+// //     .then(pictures => updateGallery(pictures));
+// // }
