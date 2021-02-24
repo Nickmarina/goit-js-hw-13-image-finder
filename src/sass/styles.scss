@@ -1,5 +1,16 @@
 body {
   background-color: lightgrey;
+  box-sizing: border-box;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
 }
 .container {
   width: 1200px;
@@ -14,6 +25,7 @@ body {
 }
 
 .gallery {
+  position: relative;
   width: inherit;
   display: flex;
   justify-content: center;
@@ -33,13 +45,15 @@ body {
 }
 .photo-card {
   position: relative;
-  height: 200px;
+  height: 230px;
   padding: 10px;
   background-color: white;
   border-radius: 10%;
   border: 1px solid #a3accc;
 
   .stats {
+    padding-left: 5px;
+    padding-right: 5px;
     position: absolute;
     bottom: 0;
     left: 0;
