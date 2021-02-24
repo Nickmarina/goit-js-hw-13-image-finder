@@ -2,41 +2,50 @@
 import apiService from './js/apiService';
 import updateGallery from './js/updateGallery';
 import refs from './js/refs';
+
 // Styles
 import './sass/styles.scss';
-// // Debounce
-// import debounce from 'lodash.debounce';
+
+// Notify
+import error from './js/notify';
 
 refs.searchForm.addEventListener('submit', submitHandlerFn);
 
 function submitHandlerFn(event) {
   event.preventDefault();
+  refs.galleryList.innerHTML = '';
   const form = event.currentTarget;
   const inputValue = form.elements.query.value;
+
   console.log(inputValue);
   if (inputValue === '') {
-    return alert('Введи что-то нормальное');
+    error('Type something');
   }
+
   if (!inputValue) {
     return;
   }
 
-  // apiService.query = form.elements.query.value;
-  // console.log(apiService.query);
-  refs.galleryList.innerHTML = '';
-
-  apiService.resetPage();
-  apiService.fetchPictures(inputValue).then(updateGallery());
+  apiService(inputValue).then(updateGallery);
 
   form.reset();
 }
 
-// // refs.searchForm.addEventListener('submit', searchItemsFn);
-// refs.searchForm.addEventListener('input', debounce(searchItemsFn, 500));
+// // Debounce
+// import debounce from 'lodash.debounce';
 
+// refs.searchForm.addEventListener('input', debounce(submitHandlerFn, 500));
+//  const inputValue = event.target.value;
+
+// apiService.query = form.elements.query.value;
+// console.log(apiService.query);
+
+// apiService.resetPage();
+
+// form.reset();
 // function searchItemsFn(event) {
 //   event.preventDefault();
-
+//  apiService.fetchPictures(inputValue).then(updateGallery);
 //   // const form = event.currentTarget;
 //   // apiService.query = form.elements.query.value;
 //   const inputValue = event.target.value;
@@ -49,7 +58,7 @@ function submitHandlerFn(event) {
 
 //   // apiService.resetPage();
 //   // clearGalleryList();
-//   apiService.fetchPictures(inputValue).then(updateGallery);
+
 //   // form.reset();
 // }
 
