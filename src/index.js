@@ -38,22 +38,33 @@ function submitHandlerFn(event) {
 function fetchPicturesFn() {
   refs.loadBtn.classList.remove('visually-hidden');
   apiService.fetchPictures().then(updateGallery);
+  scrollFn();
+}
 
-  window.scrollTo({
-    top: document.body.clientHeight - 650,
-    behavior: 'smooth',
-  });
-  // window.scrollTo({
-  //   top: document.body.scrollHeight - 700,
-  //   behavior: 'smooth',
-  // });
-  // window.scrollTo(0, document.documentElement.clientHeight);
-  // refs.galleryList.scrollIntoView({ block: 'end', behavior: 'smooth' });
+function scrollFn() {
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }, 500);
 }
 
 function hideLoadBtnFn() {
   refs.loadBtn.classList.add('visually-hidden');
 }
+
+// window.scrollTo({
+//   top: document.body.clientHeight - 650,
+//   behavior: 'smooth',
+// });
+// window.scrollTo({
+//   top: document.body.scrollHeight - 700,
+//   behavior: 'smooth',
+// });
+// window.scrollTo(0, document.documentElement.clientHeight);
+// refs.galleryList.scrollIntoView({ block: 'end', behavior: 'smooth' });
 
 // refs.searchForm.addEventListener('input', debounce(submitHandlerFn, 500));
 //  const inputValue = event.target.value;
