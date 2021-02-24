@@ -38,10 +38,17 @@ function submitHandlerFn(event) {
 function fetchPicturesFn() {
   refs.loadBtn.classList.remove('visually-hidden');
   apiService.fetchPictures().then(updateGallery);
-  // apiService.fetchPictures().then(pictures => {
-  //   apiService.incrementPage();
-  //   updateGallery(pictures);
+
+  window.scrollTo({
+    top: document.body.clientHeight - 650,
+    behavior: 'smooth',
+  });
+  // window.scrollTo({
+  //   top: document.body.scrollHeight - 700,
+  //   behavior: 'smooth',
   // });
+  // window.scrollTo(0, document.documentElement.clientHeight);
+  // refs.galleryList.scrollIntoView({ block: 'end', behavior: 'smooth' });
 }
 
 function hideLoadBtnFn() {
