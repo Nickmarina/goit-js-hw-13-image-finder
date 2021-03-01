@@ -1,3 +1,4 @@
+@import './utils/_variables';
 body {
   background-color: lightgrey;
   box-sizing: border-box;
@@ -13,9 +14,19 @@ body {
   overflow: hidden;
 }
 .container {
-  width: 1400px;
+  outline: 1px solid tomato;
+
   padding: 15px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  @media screen and (min-width: $mobile) {
+    width: $mobile;
+  }
+  @media screen and (min-width: $desktop) {
+    width: $desktop;
+    max-width: $desktop;
+  }
 }
 .sr-only {
   display: block;
@@ -26,21 +37,50 @@ body {
 
 .gallery {
   position: relative;
-  display: flex;
-  justify-content: center;
+  width: 450px;
   text-align: center;
-  flex-wrap: wrap;
   padding: 0;
   margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-top: 25px;
+  margin-bottom: 10px;
   list-style: none;
 
+  @media screen and (min-width: $desktop) {
+    width: 1170px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   &_item {
+    padding: 0;
+    margin: 0;
     width: 350px;
-    height: 350px;
-    margin-right: 20px;
+    // height: 350px;
     margin-bottom: 20px;
-    box-sizing: border-box;
+
+    @media screen and (max-width: $before-desktop) {
+      margin-left: auto;
+      margin-right: auto;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    @media screen and (min-width: $desktop) {
+      width: calc((1150 -40) / 3);
+      margin-right: 20px;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+
+      &:nth-last-child(-n + 3) {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 .photo-card {
@@ -48,7 +88,17 @@ body {
   border-radius: 10%;
   border: 1px solid #a3accc;
 
+  @media screen and (min-width: $desktop) {
+    transition: transform 250ms $timing-cubic;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.25);
+    }
+  }
+
   img {
+    width: 100%;
     padding: 0;
     margin: 0;
     border-top-left-radius: 10%;
@@ -56,6 +106,8 @@ body {
   }
 
   .stats {
+    padding: 0;
+    margin: 0;
     margin-top: 10px;
     display: flex;
     justify-content: space-around;
