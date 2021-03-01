@@ -6,12 +6,17 @@ import scrollFn from './js/scrollFn';
 
 // Styles
 import './sass/styles.scss';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 // Notify
 import info from './js/notify';
 
+// Modal for pic
+import * as basicLightbox from 'basiclightbox';
+
 refs.searchForm.addEventListener('submit', submitHandlerFn);
 refs.loadBtn.addEventListener('click', fetchPicturesFn);
+refs.galleryList.addEventListener('click', openModalFn);
 
 function submitHandlerFn(event) {
   refs.loadBtn.classList.add('visually-hidden');
@@ -40,4 +45,17 @@ function fetchPicturesFn() {
     refs.loadBtn.classList.remove('visually-hidden');
     scrollFn();
   });
+}
+
+function openModalFn(event) {
+  console.dir(event.target.dataset);
+  if (event.target.tagName !== 'IMG') {
+    return;
+  }
+
+  const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.source}">
+`);
+
+  instance.show();
 }
